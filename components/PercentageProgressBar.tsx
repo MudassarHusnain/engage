@@ -7,7 +7,7 @@ interface CircularProgressBarProps {
 const PercentageProgressBar: React.FC<CircularProgressBarProps> = ({
     progress,
     size = 40,
-    strokeWidth = 4,
+    strokeWidth = 5,
 }) => {
     const radius = (size - strokeWidth) / 2;
     const circumference = 2 * Math.PI * radius;
@@ -16,7 +16,7 @@ const PercentageProgressBar: React.FC<CircularProgressBarProps> = ({
     return (
         <>
             <div
-                className="relative flex items-center justify-center"
+                className=""
                 style={{ width: size, height: size }}
             >
                 <svg
@@ -52,8 +52,9 @@ const PercentageProgressBar: React.FC<CircularProgressBarProps> = ({
 
             </div>
             {/* Centered Text */}
-            <div className="absolute text-blue-600 font-bold">
-                {progress}%
+            <div className="py-1 font-bold">
+                {progress}<span className="font-normal"> %</span>
+                <span className="text-[12px] font-normal block text-gray-400">Response Rate</span>
             </div>
         </>
     );

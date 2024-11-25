@@ -9,7 +9,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #1f1f1f;
     --foreground: #ededed;
     --font-poppins: 'Poppins', sans-serif;
 
@@ -33,3 +33,9 @@ html, body {
 body {
   font-family: var(--font-poppins), Arial, sans-serif;
 }
+
+/* styles/global.css */
+.custom-datepicker-width {
+  width: 300px;  /* Adjust this width as needed */
+}
+
