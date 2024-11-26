@@ -7,13 +7,37 @@ import MinProgressBar from '../MinProgressBar';
 import { FaRegCalendarAlt } from "react-icons/fa";
 import "react-datepicker/dist/react-datepicker.css"; // Import styles for react-datepicker
 import ReactDatePicker from "react-datepicker";
-import { FunnelChart } from 'react-funnel-pipeline'
-import 'react-funnel-pipeline/dist/index.css'
+import MyResponsiveFunnel from '../Funnel';
+import { Data } from '@/types/dropdown';
+import Dropdown from './Dropdown';
+import MyResponsiveBullet from './LeadStatistics';
+import LinearProgressBar from './ProgressBar';
 function HeroSection() {
     const [isModalOpen, setIsModalOpen] = useState(false);
-
     const openModal = () => setIsModalOpen(!isModalOpen);  // Open modal
-
+    const [clientOnly, setClientOnly] = useState<Data[]>([{ name: 'Client Only' }, { name: 'External Agents' }, { name: 'All' }])
+    const [leadStatistics , setLeadStatistics] = useState( [
+        {
+          id: "New",
+          ranges: [44],
+        },
+        {
+          id: "power",
+          ranges: [2],
+        },
+        {
+          id: "volume",
+          ranges: [3],
+        },
+        {
+          id: "cost",
+          ranges: [368780],
+        },
+        {
+          id: "revenue",
+          ranges: [10],
+        },
+      ])
     const today = new Date();
     const [startDate, setStartDate] = useState<Date | null>(today);
     const [endDate, setEndDate] = useState<Date | null>(today);
@@ -52,7 +76,7 @@ function HeroSection() {
     return (
         <div className='w-full h-[943px] mt-8 px-[72px]'>
             <div className='flex flex-row justify-between items-start gap-[14px]'>
-                <div className='flex flex-col h-full w-[307px] gap-[12px]'>
+                <div className='flex flex-col w-full sm:w-1/3 lg:w-1/4 gap-[12px]'>
                     {/* Profile Section */}
                     <div className='flex flex-col gap-4 h-full shadow p-4'>
                         <div className=''>
@@ -68,7 +92,7 @@ function HeroSection() {
                                 <div>
                                     Liam Dawett
                                 </div>
-                                <div className='flex flex-row gap-1 font-thin'>
+                                <div className='flex flex-row gap-1 font-thin' style={{backgroundColor: '#F8F9FC'}}>
                                     <div>
                                         <FaStar className='text-blue-500 text-[14px] mt-0.5' />
                                     </div>
@@ -162,10 +186,9 @@ function HeroSection() {
                                                     selectsStart
                                                     startDate={startDate}
                                                     endDate={endDate}
-                                                    dateFormat="dd"
-                                                    className="p-1 w-12"
-                                                    placeholderText="--"
-                                                    monthsShown={4}
+                                                    dateFormat="MM/yy"
+                                                    className="p-1 w-16"
+                                                    monthsShown={2}
                                                     popperPlacement="bottom-start" // Ensure it opens to the right side
                                                 />
                                                 <span className="mx-1">to</span>
@@ -176,9 +199,9 @@ function HeroSection() {
                                                     startDate={startDate}
                                                     endDate={endDate}
                                                     minDate={startDate}
-                                                    dateFormat="dd"
-                                                    className="p-1 w-12"
-                                                    placeholderText="--"
+                                                    dateFormat="MM/yy"
+                                                    className="p-1 w-16"
+                                                    placeholderText=""
                                                     monthsShown={2}
                                                     popperPlacement="bottom-start" // Ensure it opens to the right side
                                                 />
@@ -190,23 +213,14 @@ function HeroSection() {
                                                     startDate={startDate}
                                                     endDate={endDate}
                                                     minDate={startDate}
-                                                    dateFormat="dd"
+                                                    dateFormat="MM/yyyy"
                                                     className="p-1 w-12"
-                                                    customInput={<FaRegCalendarAlt className='w-7 h-7' />}
+                                                    customInput={<FaRegCalendarAlt className='w-6 h-6' />}
                                                     monthsShown={2}
                                                     popperPlacement="bottom-start" // Ensure it opens to the right side
                                                 />
                                             </div>
                                         </div>
-
-                                        {/* Date Range Display */}
-                                        {/* <div className="mt-4">
-                                            <p className="text-sm">
-                                                {startDate && endDate
-                                                    ? `${startDate.getDate()} to ${endDate.getDate()}`
-                                                    : "Select a date range"}
-                                            </p>
-                                        </div> */}
                                     </div>
                                 </div>
                             )}
@@ -243,30 +257,39 @@ function HeroSection() {
                             </div>
                         </div>
                     </div>
-                    <div className='shadow flex flex-col'>
+                    <div className='shadow flex flex-col justify-between gap-2 h-[286px] px-4'>
                         <div className="">
-                           <div>My Funnel </div>
-                        </div>
-                        <div>
-                        <FunnelChart
-                            data={[
-                                { name: 'Awareness', value: 252 },
-                                { name: 'Interest', value: 105 },
-                                { name: 'Consideration', value: 84 },
-                                { name: 'Evaluation', value: 72 },
-                                { name: 'Commitment', value: 19 },
-                                { name: 'Pre-sale', value: 0 },
-                                { name: 'Sale', value: 10 }
-                            ]}
-                        />
+                            <div className='font-bold text-[14px]'>My Funnel <span className='font-normal text-[12px] text-gray-300'> | All time</span> </div>
+                            <div className='flex flex-col justify-between gap-1'>
+                                <div className='text-blue-500'>
+                                    Total received leads
+                                </div>
+                                <div className=' w-full h-[185px]'>
+                                    <MyResponsiveFunnel />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div className='shadow h-full w-[653px]'>
-                    {/* Empty section, can be used for additional content */}
+                <div className='shadow w-full sm:w-2/3 lg:w-3/4 flex flex-col justify-between gap-4 py-2'>
+                        <div className='flex flex-row justify-between gap-5 items-center px-4 py-2'>
+                            <div className='font-bold text-[14px]'>My Leads <span className='font-normal text-[12px] text-gray-300'> | Lead Statistics</span> </div>
+                            <div>
+                                <Dropdown data={clientOnly}/>
+                            </div>
+                        </div>
+                        <div className='flex flex-col w-full justify-between gap-2 px-4'>
+                            <LinearProgressBar progress={32} progresscolor='blue' title='New' />
+                            <LinearProgressBar progress={20} progresscolor='#B0C6F8' nonProgressColor='white' title='Qualified' />
+                            <LinearProgressBar progress={12} progresscolor='#B0C6F8' nonProgressColor='white' title='Viewing' />
+                            <LinearProgressBar progress={8} progresscolor='#B0C6F8' nonProgressColor='white' title='Offer' />
+                            <LinearProgressBar progress={5} progresscolor='#E9EAED' nonProgressColor='white' title='Reserves'/>
+                            <LinearProgressBar progress={10} progresscolor='#E9EAED' nonProgressColor='white' title='Deals'/>
+                        </div>
                 </div>
-                <div className='shadow h-full w-[305px]'>
+                <div className='shadow h-full w-1/3'>
                     {/* Empty section, can be used for additional content */}
+                    abc
                 </div>
             </div>
         </div>

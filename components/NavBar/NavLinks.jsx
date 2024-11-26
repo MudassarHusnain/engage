@@ -5,7 +5,7 @@ import image from '@/public/images/man.jpeg'
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { useState } from "react";
-import HeroSection from './HeroSection';
+import HeroSection from './../HeroSection/HeroSection';
 import Image from 'next/image';
 
 function NavLinks() {
