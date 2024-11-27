@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { Data } from '@/types/dropdown';
-
-function Dropdown({ data }: { data: Data[] }) {
+import { DropDown } from '@/types/dropdown';
+function Dropdown({ data , dropdown }: { data: Data[], dropdown: DropDown }) {
     const [selectedItem, setSelectedItem] = useState<string | null>(null);
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
@@ -35,9 +35,9 @@ function Dropdown({ data }: { data: Data[] }) {
         <div ref={dropdownRef} className="relative inline-block text-left">
             <button
                 onClick={toggleDropdown}
-                className="inline-flex w-full justify-center text-[12px] border rounded-md px-2 "
+                className="inline-flex w-full justify-center text-[12px] border rounded-md px-2 py-1.5 "
             >
-                Clients only
+                {dropdown.name}
                 <RiArrowDropDownLine aria-hidden="true" className=" size-6 pb-[5px] ps-1 rounded-lg" />
             </button>
 
