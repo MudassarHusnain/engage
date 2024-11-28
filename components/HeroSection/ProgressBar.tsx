@@ -1,55 +1,58 @@
 import React from "react";
 
 interface LinearProgressBarProps {
-    progress: number; // Progress value out of 40
-    size?: number; // Width of the progress bar (container width) in pixels
-    height?: number; // Height of the progress bar in pixels
-    progresscolor?: string; // Custom color for the progress bar
-    nonProgressColor?: string; // Custom color for the non-progress area
+    progress: number;
+    size?: number;
+    height?: number;
+    progresscolor?: string;
+    nonProgressColor?: string;
     title?: string;
 }
 
 const LinearProgressBar: React.FC<LinearProgressBarProps> = ({
     progress,
-    size = 511, // Default width of the progress bar in pixels (you can change this)
-    height = 22, // Height of the progress bar in pixels
-    progresscolor = "blue", // Default color is blue
-    nonProgressColor = "#f7fafc", // Default to gray-100 hex value
+    size = 350,
+    height = 22,
+    progresscolor = "blue",
+    nonProgressColor = "#f7fafc",
     title,
 }) => {
-    const progressWidth = (progress / 40) * size; // Calculate progress width based on the progress out of 40
+    const progressWidth = (progress / 40) * size;
+
+    // Calculate the position of the text dynamically based on size
+    const textXPosition = title === 'New' ? (size * 0.9) : 0;
 
     return (
         <>
-            <div className="flex flex-row justify-end gap-4 w-full">
+            <div className="flex flex-row justify-end items-center gap-4 w-full">
                 {title && (
                     <div className="flex justify-end text-[14px] w-[94px] ">
                         {title}
                     </div>
                 )}
 
-                <div
-                    className="border-[1px] border-gray-200 rounded-sm w-[500px]"
-                    style={{ width: size }} // Set the width of the container dynamically
-                >
-                    <svg width="100%" height={height+5}>
+                <div className="border-[1px] border-gray-200 rounded-sm w-full">
+                    <svg width="100%" height={height + 5}>
                         <rect
                             x={0}
                             y={0}
                             width="100%"
-                            height={height+10}
+                            height={height}
                             fill="none"
-                            stroke="gray"
                             strokeWidth="3"
                             className="rounded"
+                            rx={4}
+                            ry={4}
                         />
                         <rect
-                            x={0}
-                            y={0}
+                            x={2}
+                            y={2}
                             width="100%"
-                            height={height+3}
+                            height={height}
                             fill={nonProgressColor}
                             className="rounded"
+                            rx={3}
+                            ry={3}
                         />
 
                         <rect
@@ -58,11 +61,9 @@ const LinearProgressBar: React.FC<LinearProgressBarProps> = ({
                             width={progressWidth}
                             height={height}
                             fill={progresscolor}
-                            rx={3}  
-                            ry={3}  
-                            className=""
+                            rx={3}
+                            ry={3}
                         />
-
 
                         <text
                             x={progressWidth + 5}
@@ -72,19 +73,20 @@ const LinearProgressBar: React.FC<LinearProgressBarProps> = ({
                         >
                             {progress}
                         </text>
-                        {title==='New'?
-                         (<text
-                         x={size - 23}
-                         y={height / 2 + 5}
-                         fontSize="12"
-                         fill="currentColor"
-                         className="text-gray-400"
-                     >
-                         40
-                     </text>):
-                     ''  
-                    }
-                        
+
+                        {title === 'New' ? (
+                            <text
+                                x={textXPosition +10} // Dynamic position based on size
+                                y={height / 2 + 5}
+                                fontSize="12"
+                                fill="currentColor"
+                                className="text-gray-400"
+                            >
+                                40
+                            </text>
+                        ) : (
+                            ""
+                        )}
                     </svg>
                 </div>
             </div>

@@ -1,7 +1,6 @@
 import { ResponsiveBullet } from '@nivo/bullet';
 import { useEffect } from 'react';
 
-// Define the data type to focus on ranges
 interface BulletData {
   id: string;
   ranges: number[];
@@ -98,7 +97,6 @@ const MyResponsiveBullet: React.FC<MyResponsiveBulletProps> = ({ data }) => {
     return <div>No data available</div>;
   }
 
-  // Log data to verify it before passing to Nivo Bullet chart
   console.log("Data passed to MyResponsiveBullet:", data);
   useEffect(()=>{
 

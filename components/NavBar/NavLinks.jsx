@@ -1,31 +1,43 @@
 'use client'
-import React from 'react'
-import { RiNotification2Line } from "react-icons/ri";
+import React, { useState } from 'react'
 import image from '@/public/images/man.jpeg'
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { RiArrowDropDownLine } from "react-icons/ri";
-import { useState } from "react";
 import HeroSection from './../HeroSection/HeroSection';
 import Image from 'next/image';
-
+import Rect from './Rect';
+import avatar from '@/public/images/avatar.svg'
+import user from '@/public/images/user.svg'
 function NavLinks() {
     const [activeLink, setActiveLink] = useState("home");
+
+    const handleLinkClick = (linkName) => {
+        setActiveLink(linkName);
+    };
+
     return (
         <>
-            <nav className='bg-slate-50 border-b-[1px] px-[72px] py-4 h-20'>
+            <nav className='bg-navBg border-b-[1px]  py-5 h-[74px] w-full'>
                 <div>
-                    <div className="flex flex-col md:flex-row justify-between items-baseline md:items-center ">
-                        <div className=' text-blue-700 font-bold items-center'>
+                    <div className="flex flex-col md:flex-row justify-between items-baseline md:items-center h-full px-[72px] text-[14px]">
+                        <div className='text-engageColor font-bold items-center hidden md:flex'>
                             ENGAGE
-
                         </div>
-                        <div className='flex flex-row gap-9 text-[16px]'>
-                            <div className='hover:border-b-[5px] active:border-black-950 h-15'>
-                                <a className="relative text-black-950 hover:font-bold after:content-[''] after:absolute after:w-[42px] after:h-[3px] after:bg-black-950 after:opacity-0 after:transition-all after:duration-300 after:left-1/2 after:-translate-x-1/2 hover:after:opacity-100 hover:after:bottom-[-5px]">Home</a>
+                        <div className='flex flex-row justify-between gap-9 text-[16px] text-linksColor  max-[640px]:hidden'>
+                            <div className="flex text-[16px]" onClick={() => handleLinkClick("home")}>
+                                <div className="relative group h-15">
+                                    <a className={`relative text-navText hover:font-bold ${activeLink === "home" && ('font-bold')}`}>Home</a>
+                                    {activeLink === "home" && (
+                                        <div className="absolute top-10">
+                                            <Rect />
+                                        </div>
+                                    )}
+                                </div>
                             </div>
+
                             <Menu as="div" className="relative inline-block text-left">
                                 <div>
-                                    <MenuButton className="inline-flex w-full justify-center text-black-950 hover:font-bold after:content-[''] after:absolute after:w-[42px] after:h-[3px] after:bg-black-950 after:opacity-0 after:transition-all after:duration-300 after:left-1/2 after:-translate-x-1/2 hover:after:opacity-100 hover:after:bottom-[-5px]">
+                                    <MenuButton className="inline-flex w-full justify-center text-navText hover:font-bold after:content-[''] after:absolute after:w-[42px] after:h-[3px] after:bg-black-950 after:opacity-0 after:transition-all after:duration-300 after:left-1/2 after:-translate-x-1/2 hover:after:opacity-100 hover:after:bottom-[-5px]">
                                         Explore
                                         <RiArrowDropDownLine aria-hidden="true" className="p-0 m-0 size-5 mt-0.5 text-gray-400" />
                                     </MenuButton>
@@ -73,22 +85,37 @@ function NavLinks() {
                                     </div>
                                 </MenuItems>
                             </Menu>
-                            <a className="relative text-black-950 hover:font-bold after:content-[''] after:absolute after:w-[42px] after:h-[3px] after:bg-black-950 after:opacity-0 after:transition-all after:duration-300 after:left-1/2 after:-translate-x-1/2 hover:after:opacity-100 hover:after:bottom-[-5px]">
 
-                                <div className='active:border-b-2 active:border-black-950'>Your Leads </div>
-                            </a>
-                            <a className="relative text-black-950 hover:font-bold after:content-[''] after:absolute after:w-[42px] after:h-[3px] after:bg-black-950 after:opacity-0 after:transition-all after:duration-300 after:left-1/2 after:-translate-x-1/2 hover:after:opacity-100 hover:after:bottom-[-5px]">
+                            <div className="flex text-[16px]" onClick={() => handleLinkClick("yourLeads")}>
+                                <div className="relative group h-15">
+                                <a className={`relative text-navText hover:font-bold ${activeLink === "yourLeads" && ('font-bold')}`}>Your Leads</a>
+                                    {activeLink === "yourLeads" && (
+                                        <div className="absolute top-10">
+                                            <Rect />
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
 
-                                <div className='active:border-b-2 active:border-black-950'>Your Listings </div>
-                            </a>
+                            <div className="flex text-[16px]" onClick={() => handleLinkClick("yourListings")}>
+                                <div className="relative group h-15">
+                                    <a className={`relative text-navText hover:font-bold ${activeLink === "yourListings" && ('font-bold')}`}>Your Listings</a>
+                                    {activeLink === "yourListings" && (
+                                        <div className="absolute top-10">
+                                            <Rect />
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
                         </div>
-                        <div className='flex gap-4 items-center'>
-                            <RiNotification2Line className='shadow w-6 h-6 p-1' />
-                            <Image src={image} width={30} height={30} alt='Profile Images' />
+
+                        <div className='flex gap-4 items-center max-[640px]:justify-between max-[640px]:flex-row max-[640px]:w-full'>
+                            <Image src={user} width={30} height={30} className='shadow w-30 h-30' alt='Notification' />
+                            <Image src={avatar} width={30} height={30} alt='Profile Images' />
                             <div className="">
                                 <Menu as="div" className="relative inline-block text-left">
                                     <div>
-                                        <MenuButton className="inline-flex w-full justify-center gap-x-1.5 rounded-md  px-3 py-2  text-gray-900 hover:bg-gray-50">
+                                        <MenuButton className="inline-flex w-full text-[14px] justify-center gap-x-1.5 rounded-md  px-3 py-2  text-gray-900 hover:bg-gray-50">
                                             Laim Jashuwa
                                             <RiArrowDropDownLine aria-hidden="true" className="-mr-1 size-6 rounded-lg text-gray-400" />
                                         </MenuButton>
@@ -127,7 +154,7 @@ function NavLinks() {
                                                 <MenuItem>
                                                     <button
                                                         type="submit"
-                                                        className="block w-full px-4 py-2 text-left text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900 data-[focus]:outline-none"
+                                                        className="block w-full px-4 py-2 text-left text-sm text-logOutColor data-[focus]:bg-gray-100 data-[focus]:text-logOutColor data-[focus]:outline-none"
                                                     >
                                                         Sign out
                                                     </button>

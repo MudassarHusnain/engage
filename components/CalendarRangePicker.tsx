@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import ReactDatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css"; // Import styles for react-datepicker
-import { FaRegCalendarAlt } from "react-icons/fa"; // Import the calendar icon
+import "react-datepicker/dist/react-datepicker.css"; 
+import { FaRegCalendarAlt } from "react-icons/fa"; 
 
 type CalendarRangePickerProps = {
     open: boolean;
@@ -13,27 +13,26 @@ const CalendarRangePicker: FC<CalendarRangePickerProps> = ({ open, close }) => {
     const [startDate, setStartDate] = useState<Date | null>('');
     const [endDate, setEndDate] = useState<Date | null>('');
 
-    // Set the date range based on selected period (This Month, 3M, 6M, 1Y)
     const handlePresetRange = (range: string) => {
         const newStartDate = new Date(today);
         const newEndDate = new Date(today);
 
         switch (range) {
             case "thisMonth":
-                newStartDate.setDate(1); // Start of the current month
-                newEndDate.setMonth(today.getMonth() + 1); // Go to the next month
-                newEndDate.setDate(0); // Set the last day of the current month
+                newStartDate.setDate(1);
+                newEndDate.setMonth(today.getMonth() + 1); 
+                newEndDate.setDate(0);
                 break;
             case "3M":
-                newStartDate.setMonth(today.getMonth() - 3); // 3 months ago
+                newStartDate.setMonth(today.getMonth() - 3);
                 newEndDate.setDate(today.getDate());
                 break;
             case "6M":
-                newStartDate.setMonth(today.getMonth() - 6); // 6 months ago
+                newStartDate.setMonth(today.getMonth() - 6); 
                 newEndDate.setDate(today.getDate());
                 break;
             case "1Y":
-                newStartDate.setFullYear(today.getFullYear() - 1); // 1 year ago
+                newStartDate.setFullYear(today.getFullYear() - 1); 
                 newEndDate.setDate(today.getDate());
                 break;
             default:
@@ -46,22 +45,20 @@ const CalendarRangePicker: FC<CalendarRangePickerProps> = ({ open, close }) => {
 
     return (
         <>
-            {/* Modal Overlay */}
             {open && (
                 <div
                     className="fixed inset-0 flex items-center justify-start bg-gray-800 bg-opacity-50 transition-opacity duration-300"
-                    onClick={close} // Close modal when clicking outside
-                    style={{ zIndex: 50 }} // Ensure it's above other content
+                    onClick={close} 
+                    style={{ zIndex: 50 }} 
                 >
                     <div
                         className="bg-white px-3 py-2 rounded-lg shadow-lg w-[264px] h-[94px]"
-                        onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside the modal
+                        onClick={(e) => e.stopPropagation()}
                         style={{
                             opacity: open ? 1 : 0,
                             transition: 'opacity 0.3s ease-in-out',
                         }}
                     >
-                        {/* Date Range Preset Buttons */}
                         <div className="flex flex-row gap-1">
                             <button
                                 className="w-[83px] text-sm shadow"
@@ -89,7 +86,6 @@ const CalendarRangePicker: FC<CalendarRangePickerProps> = ({ open, close }) => {
                             </button>
                         </div>
 
-                        {/* Date Range Picker (Using react-datepicker) */}
                         <div className="mt-4">
                             <div className="flex flex-row flex-grow justify-between items-center">
                                 <span className="mx-1">From</span>
@@ -104,12 +100,12 @@ const CalendarRangePicker: FC<CalendarRangePickerProps> = ({ open, close }) => {
                                     placeholderText="--"
                                     monthsShown={2}
                                     popperClassName=""
-                                    popperPlacement="bottom-end" // Ensure it opens to the right side
+                                    popperPlacement="bottom-end" 
                                     popperModifiers={[
                                         {
                                             name: 'offset',
                                             options: {
-                                                offset: [0, 10], // Adjust this value to ensure it's to the right
+                                                offset: [0, 10], 
                                             },
                                         },
                                     ]}
@@ -131,7 +127,6 @@ const CalendarRangePicker: FC<CalendarRangePickerProps> = ({ open, close }) => {
                             </div>
                         </div>
 
-                        {/* Date Range Display */}
                         <div className="mt-4">
                             <p className="text-sm">
                                 {startDate && endDate
