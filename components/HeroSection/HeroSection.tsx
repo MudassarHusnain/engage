@@ -110,9 +110,9 @@ const calculateColor = (slaTime: any) => {
 
     const timeDifference = (currentTime - slaDate) / (1000 * 60 * 60);
 
-    if (timeDifference < 4) {
+    if (timeDifference < 1) {
         return blueDot;
-    } else if (timeDifference >= 4 && timeDifference < 8) {
+    } else if (timeDifference >= 1 && timeDifference < 2) {
         return yellowDot;
     } else {
         return redDot;
@@ -218,12 +218,12 @@ function HeroSection() {
                                 <div>
                                     Liam Dawett
                                 </div>
-                                <div className='flex flex-row gap-1 font-thin' style={{ backgroundColor: '#F8F9FC' }}>
+                                <div className='flex flex-row items-center gap-1 font-thin' style={{ backgroundColor: '#F8F9FC' }}>
                                     <div>
-                                        <Image src={checkbadge} className='text-blue-500 text-[14px] mt-0.5' alt='checkbadge' />
+                                        <Image src={checkbadge} className='text-blue-500 text-[14px]' alt='checkbadge' />
                                     </div>
                                     <div className=''>
-                                        <span className='text-[12px] font-bold'>4.5 </span><span className='text-engageColor px-1 py-1 text-[12px]'>(21)  | EngageHero</span>
+                                        <span className='text-[12px] font-bold'>4.5 </span><span className='text-engageColor px-1 py-1 text-[12px]'>(21)  <span className='text-textColor'>|</span> EngageHero</span>
                                     </div>
                                 </div>
                             </div>
@@ -240,7 +240,7 @@ function HeroSection() {
                             </div>
                         </div>
                         <hr />
-                        <div className='flex flex-row justify-between px-[20px] w-[275px]'>
+                        <div className='flex flex-row justify-between px-[20px] w-full'>
                             <div className=''>
                                 <MinProgressBar minutes={5} />
                             </div>
@@ -415,9 +415,9 @@ function HeroSection() {
                     <div>
                         <div className="px-4  flex flex-col justify-between gap-4">
                             <div className="flex flex-row justify-between gap-4 py-[10px]">
-                                <div className="w-2/3 relative">
-                                    <span className="absolute inset-y-0 left-3 flex items-center text-gray-500">
-                                        <IoIosSearch className="w-5 h-5" />
+                                <div className="w-4/6 flex flex-row justify-between relative">
+                                    <span className=" flex items-center text-gray-500 absolute left-2 top-2">
+                                        <IoIosSearch className="w-5 h-5 inline-block" />
                                     </span>
                                     <input
                                         type="text"
@@ -425,17 +425,19 @@ function HeroSection() {
                                         placeholder="Search by Name, Mobile number, Lead ID"
                                     />
                                 </div>
-                                <div className='w-1/3 flex flex-row justify-between gap-4'>
+                                <div className='w-1/6 flex'>
                                     <div>
                                         <Dropdown data={tenants} dropdown={dropdowns[1]} />
                                     </div>
+                                </div>
+                                <div className='w-1/6 flex'>
+                                   
                                     <div>
                                         <Dropdown data={newest} dropdown={dropdowns[2]} />
                                     </div>
                                 </div>
                             </div>
                             <div className="flex flex-col space-y-2  justify-between">
-                                {/* Header Row */}
                                 <div className='flex flex-row justify-between'>
                                     <div className="flex text-left gap-4 text-[12px] text-textColor w-5/6">
                                         <div className="w-1/5 px-[6px] py-[8px] font-normal">Stage</div>
@@ -448,7 +450,6 @@ function HeroSection() {
                                 </div>
 
 
-                                {/* Data Rows */}
                                 {records.map((record, index) => (
                                     <div
                                         key={index}
@@ -471,36 +472,34 @@ function HeroSection() {
                                             <div className="w-1/5 px-[6px] py-[8px]">{record.location}</div>
                                             <div className={`w-1/5 hidden ${record.name === 'WhatsApp User' ? 'group-hover:flex' : 'hidden'}`}>
                                                 <div className=' flex flex-row justify-start py-2'>
-                                                    <Image src={w1} alt='whatsapp message' className='h-8 w-8 px-1' />
-                                                    <Image src={w2} alt='call' className='h-8 w-8 px-1' />
-                                                    <Image src={w3} alt='whatsapp' className='h-8 w-8 px-1' />
+                                                    <Image src={w1} alt='whatsapp message' className='h-8  px-.5' />
+                                                    <Image src={w2} alt='call' className='h-8 px-1' />
+                                                    <Image src={w3} alt='whatsapp' className='h-8 px-1' />
                                                 </div>
                                             </div>
                                             <div className={`w-1/5 px-[6px] py-[8px] ${record.name === 'WhatsApp User' ? 'group-hover:hidden' : 'flex'}`}>{record.beds}</div>
 
                                         </div>
 
-                                        {/* SLA and Button Section */}
-                                        <div className="w-1/6 px-[6px] py-[8px] relative">
-                                            {/* SLA container */}
+                                        <div className="w-1/6 px-[6px] py-[8px] relative text-[12px]">
                                             {record.name === 'WhatsApp User' ?
-                                                (<div className={`flex flex-row justify-between ${record.name === 'WhatsApp User' ? 'group-hover:hidden' : 'flex'}`}>
-                                                    <Image src={w1} alt='whatsapp message' className='h-8 w-8 px-1' />
-                                                    <Image src={w2} alt='call' className='h-8 w-8 px-1' />
-                                                    <Image src={w3} alt='whatsapp' className='h-8 w-8 px-1' />
+                                                (<div className={`flex flex-row justify-between gap-[2px] items-center ${record.name === 'WhatsApp User' ? 'group-hover:hidden' : 'flex'}`}>
+                                                    <Image src={w1} alt='whatsapp message' className='h-6 w-6' />
+                                                    <Image src={w2} alt='call' className='h-6 w-6' />
+                                                    <Image src={w3} alt='whatsapp' className='h-6 w-6' />
                                                 </div>) :
-                                                (<div className="w-[97px] h-[30px] border rounded px-[7px] py-[4px] flex justify-between items-center group-hover:hidden">
-                                                    <span className="text-textColor w-[30px]">SLA: </span>
-                                                    <span className="font-bold w-[40px]"> {record.sla}</span>
-                                                    <span className="w-[20px]">
-                                                        <Image src={calculateColor(record.sla)} width={10} height={10} alt='blueDot' className='mx-1.5' />
+                                                (<div className="w-full h-[30px] border rounded py-[4px] px-[7px] flex justify-between items-center group-hover:hidden">
+                                                    <span className="text-textColor">SLA: </span>
+                                                    <span className="font-bold "> {record.sla}</span>
+                                                    <span className="">
+                                                        <Image src={calculateColor(record.sla)} alt='blueDot' className='mx-1' />
                                                     </span>
                                                 </div>
                                                 )
                                             }
                                             <div className="absolute right-2 top-1.5 group-hover:block hidden">
                                                 {record.name === 'WhatsApp User' ?
-                                                    <button className="w-20 h-8 bg-black text-white rounded">update</button> :
+                                                    <button className="px-2 h-8 bg-black text-white rounded">update</button> :
                                                     <button className="w-10 h-8 bg-black text-white rounded">Ok</button>
                                                 }
                                             </div>

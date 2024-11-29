@@ -31,13 +31,13 @@ function Dropdown({ data , dropdown }: { data: Data[], dropdown: DropDown }) {
     };
     console.log(selectedItem)
     return (
-        <div ref={dropdownRef} className="relative inline-block text-left">
+        <div ref={dropdownRef} className="relative text-left text-[12px]">
             <button
                 onClick={toggleDropdown}
-                className="inline-flex w-full items-center text-[12px] border rounded-md px-2 py-1.5 "
+                className={`inline-flex w-full items-center text-[12px] border rounded px-2 py-1.5 ${dropdown.name==="Client Only" && ('font-bold')} `}
             >
                 {dropdown.name==="Newest"? (
-                  <Image src={newest} alt="Newest" width={20} height={20} />
+                  <Image src={newest} alt="Newest" width={13} height={13} />
                 ): ""
             }
                 {dropdown.name}
@@ -45,19 +45,19 @@ function Dropdown({ data , dropdown }: { data: Data[], dropdown: DropDown }) {
             </button>
 
             {isOpen && (
-                <div className="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5">
+                <div className="absolute right-0 z-10 origin-top-right rounded bg-white shadow-lg ring-1 ring-black/5 text-[12px] w-[157px] h-[108px] gap-2">
                     <div className="py-1">
                         {data.map((item, index) => (
-                            <div key={index} className="flex items-center space-x-2 p-2">
+                            <div key={index} className="flex items-center space-x-2 p-2 text-[12px]">
                                 <input
                                     type="radio"
                                     id={`radio-${item.name}`}
                                     name="client" 
                                     checked={selectedItem === item.name}
                                     onChange={() => handleRadioChange(item.name)}
-                                    className="h-4 w-4 rounded-full border-gray-300 text-blue-600 focus:ring-blue-500"
+                                    className="h-4 w-4 rounded-full border-gray-300 text-blue-600 focus:ring-blue-500 text-[12px]"
                                 />
-                                <label htmlFor={`radio-${item.name}`} className="text-sm text-gray-700">
+                                <label htmlFor={`radio-${item.name}`} className=" text-gray-700 text-[12px]">
                                     {item.name}
                                 </label>
                             </div>

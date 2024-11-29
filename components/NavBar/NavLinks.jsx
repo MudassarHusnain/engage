@@ -115,7 +115,7 @@ function NavLinks() {
                             <div className="">
                                 <Menu as="div" className="relative inline-block text-left">
                                     <div>
-                                        <MenuButton className="inline-flex w-full text-[14px] justify-center gap-x-1.5 rounded-md  px-3 py-2  text-gray-900 hover:bg-gray-50">
+                                        <MenuButton className="inline-flex w-full text-[14px] justify-center items-center gap-x-1.5 rounded-md  px-3 py-2  text-gray-900 hover:bg-gray-50">
                                             Laim Jashuwa
                                             <RiArrowDropDownLine aria-hidden="true" className="-mr-1 size-6 rounded-lg text-gray-400" />
                                         </MenuButton>
